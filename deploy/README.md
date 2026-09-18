@@ -21,6 +21,16 @@ always-on. Any small VM works (a 1 vCPU / 1 GB box is enough to start).
 - Create an **Always Free** VM (Ubuntu 22.04, ARM `VM.Standard.A1.Flex` or AMD `E2.1.Micro`).
 - Open ports **80** (and **443** later) in the VCG security list + `ufw`.
 
+### Quick start (one script)
+On a fresh Ubuntu VM you can skip steps 2–4 and run the provisioner, which
+installs Docker, clones your fork, generates secrets, and brings the stack up:
+```bash
+REPO_URL=https://github.com/cshah911/openbull.git BRANCH=deploy/cloud-and-smc \
+  bash <(curl -fsSL https://raw.githubusercontent.com/cshah911/openbull/deploy/cloud-and-smc/deploy/provision.sh)
+```
+It pauses once for you to edit `.env.prod` (DOMAIN, Databricks). Prefer manual?
+Follow the steps below.
+
 ### 2. Install Docker
 ```bash
 curl -fsSL https://get.docker.com | sh
